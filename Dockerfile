@@ -1,18 +1,16 @@
 FROM ubuntu:latest
 
-# Install Python 3.10, pip, and git
+# Install required packages
 RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
-    git
+    git \
+    && apt-get clean
 
-# Ensure Python 3.10 is used as default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
-
-# Upgrade pip to avoid potential issues
+# Ensure pip is up to date
 RUN python3 -m pip install --upgrade pip
 
-# Install PyYAML using python3
+# Install PyYAML
 RUN python3 -m pip install PyYAML
 
 COPY feed.py /user/bin/feed.py
